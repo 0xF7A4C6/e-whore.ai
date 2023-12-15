@@ -25,7 +25,6 @@ func NewVercelClient() (*Client, error) {
 
 	c, err := cleanhttp.NewCleanHttpClient(&cleanhttp.Config{
 		BrowserFp: fp,
-		//Proxy:     "http://thunderwjpdyokb47Q-res-ANY:bpjlrxnenkmy52B@gw.thunderproxies.net:5959",
 	})
 
 	if err != nil {
@@ -145,8 +144,6 @@ func (c *Client) GetPrompt(prompt string) (string, error) {
 
 	fmt.Println(string(payload), token)
 
-	//l, _ := cleanhttp.CalculateContentLength(bytes.NewReader(payload))
-
 	response, err := c.Http.Do(cleanhttp.RequestOption{
 		Method: "POST",
 		Url:    "https://sdk.vercel.ai/api/generate",
@@ -154,7 +151,6 @@ func (c *Client) GetPrompt(prompt string) (string, error) {
 			`authority`:          {`sdk.vercel.ai`},
 			`accept`:             {`*/*`},
 			`accept-language`:    {`fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7`},
-			//`content-length`:     {fmt.Sprintf("%d", l)},
 			`content-type`:       {`application/json`},
 			`custom-encoding`:    {token},
 			`origin`:             {`https://sdk.vercel.ai`},
